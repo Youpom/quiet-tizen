@@ -133,7 +133,7 @@ public sealed class QuietHome : NUIApplication
   if(page==0){
   Add(new ImageView{ResourceUrl=Root+"glass-shelf.svg",Position2D=new Position2D(0,784),Size2D=new Size2D(1920,280)});
   Dock("Spotify","app:rJeHak5zRg.Spotify","spotify",0);
-  Dock("YouTube","app:xvvl3S1TT1.TizenTubeStandalone","youtube",1);
+  Dock("YouTube","app:com.samsung.tv.cobalt-yt","youtube",1);
   Dock("PlayStation 5","hdmi:"+HdmiPs5,"ps5",2);
   Dock("Your Apps","page:1","apps",3);
   }
@@ -192,7 +192,7 @@ public sealed class QuietHome : NUIApplication
   artworkPreloadRoot=new View{Size2D=new Size2D(1920,1080),Opacity=0};
   Window.Default.Add(artworkPreloadRoot);
   foreach(var app in library)if(!app.Utility)GetArtwork(app,328,184);
-  foreach(var id in new[]{"rJeHak5zRg.Spotify","xvvl3S1TT1.TizenTubeStandalone"}){
+  foreach(var id in new[]{"rJeHak5zRg.Spotify","com.samsung.tv.cobalt-yt"}){
    var app=library.Find(a=>a.Id==id);if(app!=null)GetArtwork(app,253,126);
   }
  }
