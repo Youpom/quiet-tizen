@@ -13,15 +13,17 @@ public sealed class QuietHome : NUIApplication
  const string Root="/opt/usr/apps/com.samsung.tv.bixby-promotion/res/quiet-home/";
  const string StateFile="/tmp/quiet-home-state.txt";
  // ─── TAILORING FOR THIS TV (QA65QE1DAUXZN) ───────────────────────────────
- // Fill these in from the actual TV, then rebuild. Until then they are guesses
- // and input switching will not land on the right port.
- //   1. HDMI source numbers: run Probe (docs/04-launcher.md, "Adapt inputs and
- //      apps") to read the real values. The tested U8000F used 13/14/15.
- //   2. App IDs: verify Spotify's id and set the real TizenBrew id in
- //      launcher/assets/apps.local.json AND the dock/preload lists below.
- const int HdmiFirestick = 14; // TODO: Probe — Fire TV (main, hero card)
- const int HdmiXbox      = 15; // TODO: Probe — Xbox
- const int HdmiPs5       = 13; // TODO: Probe — PlayStation 5
+ // Physical ports (confirmed by owner): HDMI 1 = Fire TV, HDMI 2 = PS5,
+ // HDMI 3 = Xbox. The source_type integers below assume the standard Samsung
+ // mapping HDMI 1/2/3 -> 13/14/15 (as on the tested U8000F). NOT yet verified on
+ // this model: confirm with Probe, or by trial — if a card switches to the wrong
+ // input when you run it, swap the number here and rebuild.
+ const int HdmiFirestick = 13; // HDMI 1 — Fire TV (main, hero card)
+ const int HdmiPs5       = 14; // HDMI 2 — PlayStation 5
+ const int HdmiXbox      = 15; // HDMI 3 — Xbox
+ // App IDs are Tizen package ids (format like "rJeHak5zRg.Spotify"), read from
+ // the TV's own app list — a Spotify *account* username is not the app id. Set
+ // them in launcher/assets/apps.local.json and the dock/preload lists below.
  // ─────────────────────────────────────────────────────────────────────────
  sealed class Slot { public View Card,Shadow,FocusRing; public TextLabel Label; public string Name,Action,Description; public int Row,X,Y,W,H; }
  sealed class CachedArtwork { public ImageView Image; public View Parent; }
@@ -131,7 +133,7 @@ public sealed class QuietHome : NUIApplication
   if(page==0){
   Add(new ImageView{ResourceUrl=Root+"glass-shelf.svg",Position2D=new Position2D(0,784),Size2D=new Size2D(1920,280)});
   Dock("Spotify","app:rJeHak5zRg.Spotify","spotify",0);
-  Dock("YouTube","app:REPLACE.tizenbrew-app-id","youtube",1);
+  Dock("YouTube","app:xvvl3S1TT1.TizenTubeStandalone","youtube",1);
   Dock("PlayStation 5","hdmi:"+HdmiPs5,"ps5",2);
   Dock("Your Apps","page:1","apps",3);
   }
@@ -190,7 +192,7 @@ public sealed class QuietHome : NUIApplication
   artworkPreloadRoot=new View{Size2D=new Size2D(1920,1080),Opacity=0};
   Window.Default.Add(artworkPreloadRoot);
   foreach(var app in library)if(!app.Utility)GetArtwork(app,328,184);
-  foreach(var id in new[]{"rJeHak5zRg.Spotify","REPLACE.tizenbrew-app-id"}){
+  foreach(var id in new[]{"rJeHak5zRg.Spotify","xvvl3S1TT1.TizenTubeStandalone"}){
    var app=library.Find(a=>a.Id==id);if(app!=null)GetArtwork(app,253,126);
   }
  }
