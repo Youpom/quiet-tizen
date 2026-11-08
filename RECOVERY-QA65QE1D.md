@@ -118,17 +118,24 @@ Stay out of it.
 
 ---
 
-## 5. Check your firmware availability NOW (while the TV is healthy)
-1. Go to Samsung support, search your exact model `QA65QE1DAUXZN` (your region
-   code is `XZN`).
-2. Open **Downloads** / **Manuals & Software**.
-3. See whether a **Firmware** file is offered.
-   - **If yes:** download it now and keep it on a FAT32 USB stick — your Tier 3
-     net is ready.
-   - **If no:** USB re-flash may not be available for your model; your real
-     safety then rests entirely on **Tiers 0–2** (snapshots + factory reset).
-     That makes §2 even more important — and is a strong reason to think hard
-     before the cleanup/startup edits.
+## 5. Firmware for USB re-flash — CONFIRMED AVAILABLE ✅
+Samsung publishes the stock firmware for this exact chassis (verified:
+`application/x-zip-compressed`, ~2.9 GB, from Samsung's official
+`downloadcenter.samsung.com`):
+
+- **File:** `T-NKLDUABC_OS_0090.zip` — matches your firmware line
+  `T-NKLDUABC-0090-…`.
+- **Stage it ready** on a **FAT32 USB stick, ≥8 GB**:
+  1. Download the `.zip`.
+  2. **Extract it** — you get a firmware folder (e.g. `T-NKLDUABC`).
+  3. Copy that **folder to the root** of the FAT32 stick (the TV reads the
+     extracted folder, not the zip).
+- **To re-flash:** TV → **Settings → Support → Software Update → Update Now**;
+  it detects the USB. **Never remove the USB or cut power mid-update** — that is
+  the one action that turns a soft brick into a mainboard failure.
+
+Your Tier 3 net is real: a soft-brick that still powers on can be returned to
+stock. (It still cannot fix a hardware/backlight failure.)
 
 ---
 
@@ -141,6 +148,7 @@ Stay out of it.
 | TV IP / Mac IP | `192.168.1.125` / `192.168.1.172` |
 | Reconnect SDB | `sdb kill-server && sdb start-server && sdb connect 192.168.1.125:26101` |
 | Factory reset | Settings → General & Privacy → Reset · PIN `0000` |
+| Stock firmware (USB re-flash) | `T-NKLDUABC_OS_0090.zip` (~2.9 GB) from downloadcenter.samsung.com → extract → FAT32 USB |
 | Un-wedge dev svc | Toggle Developer Mode off/on, or restart TV |
 | Forbidden | passwd, SDB key, secure boot, bootloader, broad deletes, service menu |
 
