@@ -118,24 +118,31 @@ Stay out of it.
 
 ---
 
-## 5. Firmware for USB re-flash — CONFIRMED AVAILABLE ✅
-Samsung publishes the stock firmware for this exact chassis (verified:
-`application/x-zip-compressed`, ~2.9 GB, from Samsung's official
-`downloadcenter.samsung.com`):
+## 5. Firmware for USB re-flash — DOWNLOADED & VERIFIED ✅
+Stock firmware for this exact chassis is on the Mac at
+`~/QA65QE1D-recovery-firmware/`, extracted and **MD5-verified** against
+Samsung's own checksums:
 
-- **File:** `T-NKLDUABC_OS_0090.zip` — matches your firmware line
-  `T-NKLDUABC-0090-…`.
-- **Stage it ready** on a **FAT32 USB stick, ≥8 GB**:
-  1. Download the `.zip`.
-  2. **Extract it** — you get a firmware folder (e.g. `T-NKLDUABC`).
-  3. Copy that **folder to the root** of the FAT32 stick (the TV reads the
-     extracted folder, not the zip).
-- **To re-flash:** TV → **Settings → Support → Software Update → Update Now**;
-  it detects the USB. **Never remove the USB or cut power mid-update** — that is
-  the one action that turns a soft brick into a mainboard failure.
+| Folder | Image | Version | MD5 (verified) |
+|---|---|---|---|
+| `T-NKLDUABC-0090/` | standard reinstall (`upgrade.msd`) | **2123.9 — your exact firmware** | `607df6…b657b18` ✅ |
+| `T-NKLDUABC/` | OSU deep OS recovery (`upgrade_OSU.msd`) | 6500 | `e5d5ea…bdc02734` ✅ |
 
-Your Tier 3 net is real: a soft-brick that still powers on can be returned to
-stock. (It still cannot fix a hardware/backlight failure.)
+**Put it on a USB stick (do this before any change):**
+1. USB stick **≥8 GB, formatted FAT32** (not exFAT/NTFS — the TV won't read them).
+2. Copy **both** folders (`T-NKLDUABC-0090` and `T-NKLDUABC`) to the **root** of
+   the stick.
+3. Keep the stick with the TV.
+
+**To re-flash a soft-bricked TV that still powers on:**
+- TV → **Settings → Support → Software Update → Update Now** → it detects the USB
+  and reinstalls. **Never remove the USB or cut power mid-update** — that is the
+  one action that turns a soft brick into a mainboard failure.
+- `T-NKLDUABC-0090` restores your exact stock firmware; the OSU image is the
+  deeper fallback.
+
+Your Tier 3 net is real and ready: a soft-brick that still powers on can be
+returned to stock. (It still cannot fix a hardware/backlight failure.)
 
 ---
 
